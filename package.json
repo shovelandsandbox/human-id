@@ -1,6 +1,11 @@
 {
   "name": "humanid",
-  "version": "1.0.0",
+  "author": {
+    "name": "Shovel & Sandbox",
+    "email": "hello@joeyfigaro.com",
+    "url": "https://github.com/shovelandsandbox"
+  },
+  "version": "0.0.1",
   "description": "Memorable and reasonably collision-resistant identifiers",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -8,6 +13,7 @@
   "repository": "https://github.com/shovelandsandbox/humanid",
   "license": "MIT",
   "keywords": [],
+  "private": false,
   "scripts": {
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
