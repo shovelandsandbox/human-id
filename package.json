@@ -1,8 +1,7 @@
 {
-  "name": "humanid",
+  "name": "@shovelandsandbox/humanid",
   "author": {
     "name": "Shovel & Sandbox",
-    "email": "hello@joeyfigaro.com",
     "url": "https://github.com/shovelandsandbox"
   },
   "version": "0.0.2",
