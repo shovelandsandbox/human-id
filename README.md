@@ -9,12 +9,16 @@ Memorable and reasonably collision-resistant identifiers with corresponding hash
 ## Usage
 
 ```js
-import humanid from 'humanid'
+import humanid, { isSegmentGenerator } from '@shovelandsandbox/humanid'
 
+const getSuffix = () => 'randomSuffix'
 const [id, hash] = humanid()
+const [id2] = humanid({ suffix: getSuffix })
 
+console.log(isSegmentGenerator(getSuffix)) // true
 console.log(id) // magenta-jealous-deer-b17de
 console.log(hash) // befb40615238054022dd92934aa65cc14ead1c0812e6c05830aef6aa1b4bfeba
+console.log(id2) // gold-acute-beaver-randomSuffix
 ```
 
 ## Identifier Anatomy
