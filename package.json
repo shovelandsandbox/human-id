@@ -5,7 +5,7 @@
     "email": "hello@joeyfigaro.com",
     "url": "https://github.com/shovelandsandbox"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Memorable and reasonably collision-resistant identifiers",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
