@@ -9,7 +9,7 @@ Memorable and reasonably collision-resistant identifiers with corresponding hash
 ## Usage
 
 ```js
-import humanid, { isSegmentGenerator } from '@shovelandsandbox/humanid'
+import { humanid, isSegmentGenerator } from '@shovelandsandbox/humanid'
 
 const getSuffix = () => 'randomSuffix'
 const [id, hash] = humanid()
