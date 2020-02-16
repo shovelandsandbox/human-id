@@ -2,7 +2,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "prettier.requireConfig": true,
   "prettier.semi": false,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "prettier.configPath": "./.prettierrc"
   // "typescript.implementationsCodeLens.enabled": true
   // "typescript.referencesCodeLens.enabled": true
 }
