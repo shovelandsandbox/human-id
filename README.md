@@ -1,10 +1,10 @@
-# HumanID
+# Human ID
 
 Memorable and reasonably collision-resistant identifiers with corresponding hashes; built using Node v12.13.0 and Typescript.
 
 ## Installation
 
-`npm i --save humanid` or `yarn add humanid`
+`npm i --save @shovelandsandbox/humanid` or `yarn add @shovelandsandbox/humanid`
 
 ## Usage
 
