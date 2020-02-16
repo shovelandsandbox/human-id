@@ -3,11 +3,12 @@ import { pseudoRandomBytes } from 'crypto';
 import adjectives from '../dictionaries/adjectives.json';
 import animals from '../dictionaries/animals.json';
 import colors from '../dictionaries/colors.json';
+import colorAttributes from '../dictionaries/color-attributes.json';
 
 import * as hash from './hash';
 
-type SegmentGenerator = (...args: any) => string;
-type GenerateOptions = {
+export type SegmentGenerator = (...args: any) => string;
+export type Configuration = {
   prefix?: string | SegmentGenerator;
   suffix?: string | SegmentGenerator;
   separator?: string;
@@ -17,7 +18,7 @@ type GenerateOptions = {
 //
 //  type guards
 //
-const isSegmentGenerator = (v: any): v is SegmentGenerator =>
+export const isSegmentGenerator = (v: any): v is SegmentGenerator =>
   v !== null && (v as SegmentGenerator).call !== undefined;
 
 //
@@ -32,8 +33,9 @@ function randomIndexFor(arr: any[]) {
   }
 }
 
-function getRandomIdSegments(): string[] {
+function getRandomIdSegments(includeColorAttribute): string[] {
   return [
+    includeColorAttribute ? randomIndexFor(colorAttributes) : null,
     randomIndexFor(colors),
     randomIndexFor(adjectives),
     randomIndexFor(animals)
@@ -46,12 +48,13 @@ export function randomHexSeed(): string {
   return randomBuffer.toString('hex').slice(0, 5);
 }
 
-export default function humanid(options?: GenerateOptions) {
+export default function humanid(options?: Configuration) {
   const opts = Object.assign(
     {},
     {
       prefix: null,
       suffix: randomHexSeed,
+      includeColorAttribute: false,
       separator: '-'
     },
     options
@@ -59,7 +62,7 @@ export default function humanid(options?: GenerateOptions) {
   const joined = []
     .concat(
       [isSegmentGenerator(opts.prefix) ? opts.prefix() : opts.prefix],
-      getRandomIdSegments(),
+      getRandomIdSegments(opts.includeColorAttribute),
       [isSegmentGenerator(opts.suffix) ? opts.suffix() : opts.suffix]
     )
     .filter(Boolean)
