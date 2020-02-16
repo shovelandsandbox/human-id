@@ -19,6 +19,6 @@
 // }
 
 declare module '*.json' {
-  var data: []
-  export default data
+  var data: [];
+  export default data;
 }

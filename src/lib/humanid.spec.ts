@@ -4,8 +4,8 @@ import humanid from './humanid';
 
 test('supports default options', t => {
   const [id, hash] = humanid();
-  t.log(id)
-  t.log(hash)
+  t.log(id);
+  t.log(hash);
   t.true(id.length > 0);
   t.true(hash.length > 0);
 });
