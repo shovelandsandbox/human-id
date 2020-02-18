@@ -2,17 +2,17 @@ import { pseudoRandomBytes } from 'crypto'
 
 import adjectives from '../dictionaries/adjectives.json'
 import animals from '../dictionaries/animals.json'
-import colors from '../dictionaries/colors.json'
 import colorAttributes from '../dictionaries/color-attributes.json'
+import colors from '../dictionaries/colors.json'
 
 import * as hash from './hash'
 
 export type SegmentGenerator = (...args: any) => string
-export type Configuration = {
-  prefix?: string | SegmentGenerator
-  suffix?: string | SegmentGenerator
-  separator?: string
-  includeColorAttribute?: boolean
+export interface Configuration {
+  readonly prefix?: string | SegmentGenerator
+  readonly suffix?: string | SegmentGenerator
+  readonly separator?: string
+  readonly includeColorAttribute?: boolean
 }
 
 //
@@ -24,16 +24,15 @@ export const isSegmentGenerator = (v: any): v is SegmentGenerator =>
 //
 //  utilities for getting random data
 //
-function randomIndexFor(arr: any[]) {
+function randomIndexFor(arr: ReadonlyArray<any>): any {
   try {
     return arr[Math.floor(Math.random() * arr.length)]
   } catch (error) {
-    console.error('[fn randomIndex] encountered an error: \n', error)
     return error
   }
 }
 
-function getRandomIdSegments(includeColorAttribute): string[] {
+function getRandomIdSegments(includeColorAttribute): readonly string[] {
   return [
     includeColorAttribute ? randomIndexFor(colorAttributes) : null,
     randomIndexFor(colors),
@@ -50,17 +49,14 @@ export function randomHexSeed(): string {
 
 export default function humanid(
   options?: Configuration
-): [string, string] {
-  const opts = Object.assign(
-    {},
-    {
-      prefix: null,
-      suffix: randomHexSeed,
+): ReadonlyArray<string> {
+  const opts = {
       includeColorAttribute: false,
-      separator: '-'
-    },
-    options
-  )
+      prefix: null,
+      separator: '-',
+      suffix: randomHexSeed,
+    ...options
+  }
   const joined = []
     .concat(
       [isSegmentGenerator(opts.prefix) ? opts.prefix() : opts.prefix],
@@ -70,5 +66,5 @@ export default function humanid(
     .filter(Boolean)
     .join(opts.separator)
 
-  return [joined, hash.sha256Native(joined)] as [string, string]
+  return [joined, hash.sha256Native(joined)] as ReadonlyArray<string>
 }
