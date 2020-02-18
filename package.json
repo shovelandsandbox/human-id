@@ -4,7 +4,7 @@
     "name": "Shovel & Sandbox",
     "url": "https://github.com/shovelandsandbox"
   },
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Memorable and reasonably collision-resistant identifiers",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
